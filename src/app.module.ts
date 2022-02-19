@@ -7,8 +7,9 @@ import { AuthModule } from './auth/auth.module';
 
 
 @Module({
-  imports: [UsersModule,AuthModule, MongooseModule.forRoot(
-    'mongodb+srv://DevNetae:ehianeta@cluster0.kngtf.mongodb.net/nestjs-auth?retryWrites=true&w=majority'
+  imports: [UsersModule, AuthModule, MongooseModule.forRoot(
+    //database url string
+    'mongodb+srv://<username>:<password>@cluster0.kngtf.mongodb.net/session-auth?retryWrites=true&w=majority'
     )],
   controllers: [AppController],
   providers: [AppService],

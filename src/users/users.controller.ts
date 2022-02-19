@@ -21,7 +21,8 @@ export class UsersController {
   async addUser(
     @Body('password') userPassword: string,
     @Body('username') userName: string,
-  ) {
+  ) 
+  {
     //hash password
     const saltOrRounds = 10;
     const hashedPassword = await bcrypt.hash(userPassword, saltOrRounds);
@@ -43,17 +44,19 @@ export class UsersController {
   login(@Request() req): any {
     return {User: req.user,
             msg: 'User logged in'};
-  }
+  };
+
   //Get / protected
   @UseGuards(AuthenticatedGuard)
   @Get('/protected')
   getHello(@Request() req): string {
     return req.user;
-  }
+  };
+
   //Get / logout
   @Get('/logout')
-  logout(@Request() req): any {
-    req.logout();
-    return { msg: 'The user session has ended' }
-  }
+    logout(@Request() req): any {
+      req.session.destroy()
+      return { msg: 'The user session has ended' }
+    }
 }
